@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <locale.h>
 void input_int(int *input) //Проверка на целое число
 {
     float pr;
@@ -78,6 +79,7 @@ void second()
 }
 int main()
 {
+    setlocale(LC_CTYPE, "");
     int choise;
     while(1)
     {
