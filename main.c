@@ -10,6 +10,15 @@ void input_int(int *input) //Проверка на целое число
         *input=pr;
        }   while ((*input-pr)!=0);
 }
+void un_input_int(int *input) //Проверка на целое положительное число
+{
+    float pr;
+    do {
+        printf("Целое положительное число: ");
+        scanf("%f", &pr);
+        *input=pr;
+       }   while ((*input-pr)!=0||(pr<0));
+}
 int nechet_arr(int *arr, int lenght)
 {
     int flag=0;
@@ -38,7 +47,17 @@ int calcSquareEq(int a, int b, int c, double* x1, double* x2) //Вычислен
     *x2=(-b-sqrt(d))/(2*a);
     return 1;
 }
-void first()
+void asShortPrint(unsigned* a, int len) {
+    unsigned* boof;
+    for (boof = a; boof < a + len; boof++) {
+        if (boof == a) printf("[");
+        printf("%hu, %hu", *boof, *boof >> 16);
+        if (boof != a + len - 1) printf(", ");
+        else printf("]");
+    }
+    printf("\n");
+}
+void first() //Первое задание
 {
     int a, b, c, flag;
     double x1, x2;
@@ -57,7 +76,7 @@ void first()
         else printf("Уравнение %dx^2+%dx+%d=0 имеет два решения x1 = %.2lf\n  x2 = %.2lf\n",a,b,c, x1,x2);
     }
 }
-void second()
+void second() //Второе задание
 {
     const int lenght_arr=10;
     int i;
@@ -77,22 +96,38 @@ void second()
     }
     else printf("Массив не изменен\n");
 }
+void third() //Третье задание
+{
+    int i;
+    const int lenght_arr=10;
+    unsigned int arr[lenght_arr];
+    printf("Опишите функцию asShortPrint(unsigned* a, int len); которая принимает массив из тридцатидвухразрядных чисел (типа unsigned int), например, [0, 1, 2, 3, 4, 65541, 65542, 65543, 65544, 65545] и выводит его на экран шестнадцатиразрядными числами (типа unsigned short). \n");
+    for(i=0;i<lenght_arr;i++)
+    {
+        printf("Введите целый элемент a[%d] массива\n",i);
+        un_input_int(&arr[i]);
+    }
+    asShortPrint(&arr, lenght_arr);
+}
 int main()
 {
     setlocale(LC_CTYPE, "");
     int choise;
     while(1)
     {
-        printf("Выберете задание\n1. Первое\n2. Второе\n0. Выход\n");
+
+
+        printf("Выберете задание\n1. Первое\n2. Второе\n3. Третье\n0. Выход\n");
         input_int(&choise);
         switch(choise)
         {
             case(1): {first(); break;}
             case(2): {second(); break;}
+            case(3): {third();break;}
             case(0): return 0;
         }
 
 
-    }
+   }
     return 0;
 }
